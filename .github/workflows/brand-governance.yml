@@ -1,0 +1,51 @@
+name: Zeza Brand Governance
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    name: Validate Zeza global brand contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check brand contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f _brand/brand-governance.md
+          test -f index.html
+          grep -q 'media.zeza.co.za' index.html
+          grep -q 'zeza-co-za/media' index.html
+          grep -q '#7c2d45' _brand/brand-governance.md
+          grep -q '#b65f76' _brand/brand-governance.md
+          grep -q '#d7a84d' _brand/brand-governance.md
+          grep -q '#21171c' _brand/brand-governance.md
+
+      - name: Comment validation result on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = [
+              '### Zeza Brand Governance',
+              '',
+              '✅ Shared Zeza brand checks passed for `zeza-co-za/media`.',
+              '',
+              'The Media portal must retain the Zeza global visual system and navigation conventions while keeping its specialist media-management controls.'
+            ].join('\n');
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
