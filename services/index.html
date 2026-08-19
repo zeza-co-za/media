@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | ZEZA</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height:1.6;
+            color:#333;
+            background:#f8fafc;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+        }
+
+        /* Hero */
+        .hero{
+            background:linear-gradient(135deg,#003366,#0056b3);
+            color:#fff;
+            text-align:center;
+            padding:100px 20px;
+        }
+
+        .hero h1{
+            font-size:3rem;
+            margin-bottom:20px;
+        }
+
+        .hero p{
+            max-width:750px;
+            margin:auto;
+            font-size:1.1rem;
+            opacity:.95;
+        }
+
+        /* Services Section */
+        .services{
+            padding:80px 0;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:50px;
+        }
+
+        .section-title h2{
+            font-size:2.5rem;
+            color:#003366;
+            margin-bottom:10px;
+        }
+
+        .section-title p{
+            color:#666;
+        }
+
+        .service-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+        }
+
+        .service-card{
+            background:white;
+            padding:35px;
+            border-radius:16px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.08);
+            transition:0.3s ease;
+        }
+
+        .service-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .service-icon{
+            font-size:2.5rem;
+            margin-bottom:20px;
+        }
+
+        .service-card h3{
+            color:#003366;
+            margin-bottom:15px;
+        }
+
+        .service-card p{
+            color:#555;
+        }
+
+        /* Why choose us */
+        .why-us{
+            background:#fff;
+            padding:80px 0;
+        }
+
+        .why-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .why-item{
+            padding:30px;
+            text-align:center;
+            border:1px solid #e6e6e6;
+            border-radius:12px;
+        }
+
+        .why-item h4{
+            margin-bottom:10px;
+            color:#003366;
+        }
+
+        /* CTA */
+        .cta{
+            background:#003366;
+            color:white;
+            text-align:center;
+            padding:80px 20px;
+        }
+
+        .cta h2{
+            font-size:2.2rem;
+            margin-bottom:15px;
+        }
+
+        .cta p{
+            margin-bottom:25px;
+            max-width:700px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#00aaff;
+            color:white;
+            padding:14px 32px;
+            border-radius:50px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#0088dd;
+        }
+
+        footer{
+            background:#021b33;
+            color:#fff;
+            text-align:center;
+            padding:25px;
+        }
+
+        @media(max-width:768px){
+
+            .hero h1{
+                font-size:2.2rem;
+            }
+
+            .section-title h2{
+                font-size:2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>
+                ZEZA helps organizations accelerate digital transformation through
+                cloud solutions, AI innovation, managed IT services, cybersecurity,
+                training, and modern workplace technologies.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>What We Do</h2>
+                <p>Technology solutions designed for growth, efficiency, and innovation.</p>
+            </div>
+
+            <div class="service-grid">
+
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3>Cloud Solutions</h3>
+                    <p>
+                        Migration, optimization, and management of cloud environments
+                        including Microsoft Azure and Microsoft 365.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>AI & Automation</h3>
+                    <p>
+                        Implement AI-driven workflows, Copilot solutions,
+                        and automation strategies that increase productivity.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Cybersecurity</h3>
+                    <p>
+                        Protect your business with advanced security solutions,
+                        compliance controls, and risk management services.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h3>Managed IT Services</h3>
+                    <p>
+                        Comprehensive support, monitoring, and maintenance to
+                        keep your technology running smoothly.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Training & Enablement</h3>
+                    <p>
+                        Upskill teams with practical training in cloud,
+                        cybersecurity, AI, business applications, and more.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3>Digital Transformation</h3>
+                    <p>
+                        Modernize business processes with innovative technologies
+                        that improve operational efficiency and competitiveness.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Why Choose ZEZA?</h2>
+            </div>
+
+            <div class="why-grid">
+
+                <div class="why-item">
+                    <h4>Experienced Team</h4>
+                    <p>Certified professionals delivering enterprise-grade solutions.</p>
+                </div>
+
+                <div class="why-item">
+                    <h4>Business Focused</h4>
+                    <p>Technology aligned with measurable business outcomes.</p>
+                </div>
+
+                <div class="why-item">
+                    <h4>Scalable Solutions</h4>
+                    <p>Services that grow with your organization.</p>
+                </div>
+
+                <div class="why-item">
+                    <h4>Reliable Support</h4>
+                    <p>Responsive assistance whenever you need it.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>
+                Talk to our experts and discover how ZEZA can help you
+                leverage technology to accelerate growth.
+            </p>
+            contact/" class="btn">Contact Us</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 ZEZA. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
