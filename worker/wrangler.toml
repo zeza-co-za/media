@@ -1,0 +1,6 @@
+name = "zeza-media-upload"
+main = "src/index.js"
+compatibility_date = "2026-08-19"
+
+# Deploy the Worker and route only the API paths through it.
+# Recommended route: media.zeza.co.za/api/*
