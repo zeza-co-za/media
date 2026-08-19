@@ -1,1 +1,199 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media Repository | media.zeza.co.za</title>
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <link rel="icon" href="https://raw.githubusercontent.com/zeza-co-za/www/main/assets/favicon.svg">
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="/">
+      <span class="brand-mark">MZ</span>
+      media.zeza.co.za
+    </a>
+    <nav class="nav-menu">
+      <a href="#upload">Upload</a>
+      <a href="#files">Files</a>
+      <a href="https://github.com/zeza-co-za/media" target="_blank">GitHub Repo</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero section">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Zeza Media Repository</p>
+      <h1>Upload & Download Media</h1>
+      <p class="lead">
+        A simple, public-facing multimedia repository hosted on GitHub Pages.
+        Upload new media files or download existing ones instantly.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#upload" class="btn btn-primary">Upload Media</a>
+        <a href="#files" class="btn btn-secondary">Browse Files</a>
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <h3>Repository Status</h3>
+      <p id="repo-status">Loading repository info…</p>
+    </div>
+  </div>
+</section>
+
+<section id="upload" class="section tinted">
+  <div class="container">
+    <h2>Upload Media</h2>
+    <p class="lead">Upload images, audio, video, documents or any media file.</p>
+
+    <div class="contact-form">
+      <form id="uploadForm">
+        <div class="form-row">
+          <label>Select File</label>
+          <input type="file" id="fileInput" required>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Upload File</button>
+        </div>
+      </form>
+
+      <p class="price-note">
+        Note: Uploads require a GitHub token with repo write access.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="files" class="section">
+  <div class="container">
+    <h2>Available Media Files</h2>
+    <p class="lead">All files stored in the public media repository.</p>
+
+    <div class="card-grid three" id="fileList">
+      <p>Loading files…</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>media.zeza.co.za</h3>
+      <p>Public multimedia repository powered by GitHub Pages.</p>
+    </div>
+    <div>
+      <p><a href="https://github.com/zeza-co-za/media">GitHub Repo</a></p>
+    </div>
+    <div>
+      <p>© 2026 Zeza</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ------------------------------
+   CONFIG
+--------------------------------*/
+const repoOwner = "zeza-co-za";
+const repoName = "media";
+const apiBase = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/media`;
+
+// Insert your GitHub token here (write access required)
+const GITHUB_TOKEN = ""; // <--- ADD TOKEN HERE
+
+/* ------------------------------
+   LOAD FILE LIST
+--------------------------------*/
+async function loadFiles() {
+  const res = await fetch(apiBase);
+  const files = await res.json();
+
+  const list = document.getElementById("fileList");
+  list.innerHTML = "";
+
+  files.forEach(file => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="card-icon">📁</div>
+      <h3>${file.name}</h3>
+      <p>${(file.size / 1024).toFixed(1)} KB</p>
+      <a class="btn btn-secondary small" href="${file.download_url}" download>
+        Download
+      </a>
+    `;
+
+    list.appendChild(card);
+  });
+}
+
+/* ------------------------------
+   UPLOAD FILE
+--------------------------------*/
+document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const file = document.getElementById("fileInput").files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async () => {
+    const content = reader.result.split(",")[1];
+
+    const uploadUrl = `${apiBase}/${file.name}`;
+
+    const res = await fetch(uploadUrl, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${GITHUB_TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: `Upload ${file.name}`,
+        content: content
+      })
+    });
+
+    if (res.ok) {
+      alert("Upload successful!");
+      loadFiles();
+    } else {
+      alert("Upload failed. Check token permissions.");
+    }
+  };
+
+  reader.readAsDataURL(file);
+});
+
+/* ------------------------------
+   REPO STATUS
+--------------------------------*/
+async function loadRepoStatus() {
+  const res = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`);
+  const data = await res.json();
+
+  document.getElementById("repo-status").innerHTML =
+    `⭐ Stars: ${data.stargazers_count} • Forks: ${data.forks_count}`;
+}
+
+/* ------------------------------
+   INIT
+--------------------------------*/
+loadFiles();
+loadRepoStatus();
+</script>
+
+</body>
+</html>
